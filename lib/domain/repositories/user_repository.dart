@@ -14,11 +14,15 @@ class UserRepository {
     userLocalSharedPrefs = UserLocalSharedPrefs();
   }
 
-  Future<void> addUser(User user) async {}
+  Future<void> addUser(User user) async {
+    localDataSource.addUser(user);
+  }
 
   Future<List<User>> getAllUsers() async => await localDataSource.getAllUsers();
 
-  Future<void> storeUserInfo(User user) async {}
+  Future<void> storeUserInfo(User user) async {
+    userLocalSharedPrefs.storeUserInfo(user);
+  }
 
   Future<User> getStoredUser() async {
     try {
@@ -28,18 +32,28 @@ class UserRepository {
     }
   }
 
-  Future<void> clearStoredUser() async {}
+  Future<void> clearStoredUser() async {
+    if (await userLocalSharedPrefs.isStoringUser()){
+      userLocalSharedPrefs.clearUserInfo();
+    }
+  }
 
   init() async => await userLocalSharedPrefs.init();
 
-  signup(User user) async {}
+  signup(User user) async {
+    localDataSource.addUser(user);
+  }
 
-  logout() async {}
+  logout() async {
+    userLocalSharedPrefs.logout();
+  }
 
   clearAll() async {
     await localDataSource.deleteAll();
     await userLocalSharedPrefs.deleteAll();
   }
 
-  Future<bool> isStoringUser() async {}
+  Future<bool> isStoringUser() async {
+    return userLocalSharedPrefs.isStoringUser();
+  }
 }
