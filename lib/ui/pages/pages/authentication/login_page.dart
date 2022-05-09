@@ -1,3 +1,4 @@
+import 'package:f_local_database_shared_prefs_template/ui/pages/pages/home/content.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loggy/loggy.dart';
@@ -131,6 +132,7 @@ class _LoginPageState extends State<LoginPage> {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                         const SnackBar(
                                             content: Text('User ok')));
+                                    Get.to(() => Content());
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                         const SnackBar(

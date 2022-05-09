@@ -1,3 +1,4 @@
+import 'package:f_local_database_shared_prefs_template/ui/pages/pages/authentication/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,6 +16,7 @@ class ProfilePage extends StatelessWidget {
       child: const Text('Logout'),
       onPressed: () {
         controller.logout();
+        Get.to(() => const LoginPage());
       },
     ));
   }

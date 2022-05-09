@@ -28,8 +28,8 @@ class AuthenticationController extends GetxController {
 
   // it returns _logged, if it is true it calls getStoredUser
   bool get logged {
-    if (_logged.value){
-        getStoredUser();
+    if (_logged.value) {
+      getStoredUser();
     }
     return _logged.value;
   }
@@ -37,8 +37,8 @@ class AuthenticationController extends GetxController {
   // besides updating _storeUser, if false it clears stored data
   set storeUser(bool mode) {
     _storeUser.value = mode;
-    
-    if (_storeUser.isFalse){
+
+    if (_storeUser.isFalse) {
       _authentication.clearStoredUser();
     }
   }
@@ -58,8 +58,9 @@ class AuthenticationController extends GetxController {
   // this method gets the stored user on sharedPrefs and updates the data on
   // the controller
   Future<void> getStoredUser() async {
-    //logInfo(
-      //  'AuthenticationController getStoredUser and got <${user.email}> <${user.password}>');
+    User user = await _authentication.getStoredUser();
+    _storeUserEmail.value = user.email;
+    _storeUserPassword.value = user.password;
   }
 
   // this method clears all stored data
@@ -76,7 +77,7 @@ class AuthenticationController extends GetxController {
   // used to send signup data
   Future<bool> signup(user, password) async {
     await _authentication.signup(user, password);
-    return true;
+    return Future.value(true);
   }
 
   // used to logout the current user
